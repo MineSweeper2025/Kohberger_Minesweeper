@@ -11,7 +11,7 @@ import javafx.util.Duration;
 import org.w3c.dom.css.Counter;
 
 
-public class GameFieldController extends Thread{
+public class GameFieldController extends Thread {
 
     @FXML
     Label timeLabel = new Label();
@@ -19,45 +19,100 @@ public class GameFieldController extends Thread{
     @FXML
     GridPane gamepane = new GridPane();
 
+    private boolean[][] mines;
+    private Button[][] buttons;
+
+
     @FXML
     private void initialize() {
-
+        startTimer();
     }
 
-    public void Timer(Runnable runnable){
-        int Counter = 0;
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(10), e -> timeLabel.setText(String.valueOf(Counter +1)))
-                );
 
+    public void startTimer() {
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        final int[] counter = {0};
 
+        KeyFrame frame = new KeyFrame(Duration.seconds(1), event -> {
+            counter[0]++;
+            timeLabel.setText(String.valueOf(counter[0]));
+        });
+
+        timeline.getKeyFrames().add(frame);
+        timeline.play();
     }
 
-    void setDifficulty(int difficulty) {
+
+    int setDifficulty(int difficulty) {
+        int minesdificulty = 0;
         switch (difficulty) {
             case 1:
-                generateGrid(8, 8);
+                generateGrid(8, 8, 10);
                 break;
             case 2:
-                generateGrid(16, 16);
+                generateGrid(16, 16, 40);
                 break;
 
             case 3:
-                generateGrid(30, 16);
+                generateGrid(30, 16, 99);
                 break;
         }
+        return minesdificulty;
     }
 
-    public void generateGrid(int collums, int rows) {
+    public void generateGrid(int collums, int rows, int minesdificulty) {
+        gamepane.getChildren().clear();
+        buttons = new Button[rows][collums];
+        mines = new boolean[rows][collums];
+
+
+
+
 
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < collums; col++) {
-                Button button = new Button();
-                button.setPrefSize(30, 30);
-                gamepane.add(button, col, row);
+                Button btn = new Button();
+                btn.setPrefSize(30, 30);
+
+                int finalRow = row;
+                int finalCol = col;
+                btn.setOnAction(e -> revealField(finalRow, finalCol, rows, collums));
+
+                buttons[row][col] = btn;
+                gamepane.add(btn, col, row);
             }
         }
+        int placed = 0;
+        while (placed < minesdificulty) {
+            int r = (int) (Math.random() * rows);
+            int c = (int) (Math.random() * collums);
+            if (!mines[r][c]) {
+                mines[r][c] = true;
+                placed++;
+            }
 
+        }
+
+    }
+
+    private void revealField(int maxR, int maxC, int r, int c) {
+        if (mines[r][c]) {
+            buttons[r][c].setText("💣");
+        } else {
+            int count = 0;
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    int nr = r + i;
+                    int nc = c + j;
+                    if (nr >= 0 && nr < maxR && nc >= 0 && nc < maxC && mines[nr][nc]) {
+                        count++;
+                    }
+                }
+            }
+            buttons[r][c].setText(count > 0 ? String.valueOf(count) : "");
+            buttons[r][c].setDisable(true); // Feld deaktivieren
+        }
     }
 
 

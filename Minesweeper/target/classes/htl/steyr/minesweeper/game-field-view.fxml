@@ -3,12 +3,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="290.0" prefWidth="410.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.minesweeper.GameFieldController">
+<AnchorPane prefHeight="56.0" prefWidth="53.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.minesweeper.GameFieldController">
     <children>
-        <GridPane fx:id="gamepane" layoutX="20.0" layoutY="20.0">
+        <GridPane fx:id="gamepane" layoutY="41.0">
 
         </GridPane>
-      <Label fx:id="timeLabel" layoutX="6.0" layoutY="5.0" text="0" />
+      <Label fx:id="timeLabel" alignment="CENTER" layoutX="4.0" layoutY="2.0" text="0" textAlignment="CENTER" textFill="#e50a0a">
+         <font>
+            <Font name="System Bold Italic" size="30.0" />
+         </font></Label>
     </children>
 </AnchorPane>
