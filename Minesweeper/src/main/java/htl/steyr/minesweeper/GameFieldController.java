@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 import org.w3c.dom.css.Counter;
@@ -27,7 +29,6 @@ public class GameFieldController extends Thread {
 
     @FXML
     private void initialize() {
-
         startTimer();
     }
 
@@ -84,6 +85,7 @@ public class GameFieldController extends Thread {
                 int finalRow = row;
                 int finalCol = col;
                 btn.setOnAction(e -> revealField(rows, collums, finalRow, finalCol));
+                btn.setOnMouseClicked(e -> placeFlag(e, finalRow, finalCol));
 
                 buttons[row][col] = btn;
                 gamepane.add(btn, col, row);
@@ -103,6 +105,10 @@ public class GameFieldController extends Thread {
     }
 
     private void revealField(int maxR, int maxC, int r, int c) {
+        if (r < 0 || r >= maxR || c < 0 || c >= maxC || buttons[r][c].isDisable()) {
+            return;
+        }
+
         if (mines[r][c]) {
             buttons[r][c].setText("💣");
             buttons[r][c].setStyle("-fx-background-color: red;");
@@ -119,13 +125,11 @@ public class GameFieldController extends Thread {
                     buttons[r][c].setStyle("-fx-background-color: red;");
                 }
                 c++;
-                if (c == maxC -1) {
+                if (c == maxC - 1) {
                     r++;
                     c = 0;
                 }
             }
-
-
         } else {
             int count = 0;
             for (int i = -1; i <= 1; i++) {
@@ -137,10 +141,36 @@ public class GameFieldController extends Thread {
                     }
                 }
             }
+
             buttons[r][c].setText(count > 0 ? String.valueOf(count) : "");
             buttons[r][c].setDisable(true);
+
+            if (count == 0) {
+                for (int i = -1; i <= 1; i++) {
+                    for (int j = -1; j <= 1; j++) {
+                        revealField(maxR, maxC, r + i, c + j);
+                    }
+                }
+            }
         }
     }
 
 
-}
+
+    public void placeFlag(MouseEvent mouseEvent, int r, int c) {
+            if(mouseEvent.getButton() == javafx.scene.input.MouseButton.SECONDARY) {
+                if(buttons[r][c].getText() == "🚩"){
+                    buttons[r][c].setText("");
+                } else {
+                    buttons[r][c].setText("🚩");
+                }
+            }
+
+
+
+
+        }
+    }
+
+
+
