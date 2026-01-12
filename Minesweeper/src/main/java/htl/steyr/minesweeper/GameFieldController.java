@@ -13,11 +13,13 @@ import org.w3c.dom.css.Counter;
 
 public class GameFieldController extends Thread {
 
+    public Label gameOverLabel;
+    public Label timeLabelfinish;
     @FXML
-    Label timeLabel = new Label();
+    private Label timeLabel;
 
     @FXML
-    GridPane gamepane = new GridPane();
+    private GridPane gamepane;
 
     private boolean[][] mines;
     private Button[][] buttons;
@@ -25,23 +27,31 @@ public class GameFieldController extends Thread {
 
     @FXML
     private void initialize() {
+
         startTimer();
     }
 
 
     public void startTimer() {
+        int stopcounter = 0;
+        stopcounter++;
         Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         final int[] counter = {0};
 
-        KeyFrame frame = new KeyFrame(Duration.seconds(1), event -> {
-            counter[0]++;
-            timeLabel.setText(String.valueOf(counter[0]));
-        });
+        if (stopcounter == 1) {
+            KeyFrame frame = new KeyFrame(Duration.seconds(1), event -> {
+                counter[0]++;
+                timeLabel.setText(String.valueOf(counter[0]));
+            });
 
-        timeline.getKeyFrames().add(frame);
-        timeline.play();
+            timeline.getKeyFrames().add(frame);
+            timeline.play();
+        } else if (stopcounter == 2) {
+            timeline.stop();
+        }
     }
+
 
 
     int setDifficulty(int difficulty) {
@@ -66,10 +76,6 @@ public class GameFieldController extends Thread {
         buttons = new Button[rows][collums];
         mines = new boolean[rows][collums];
 
-
-
-
-
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < collums; col++) {
                 Button btn = new Button();
@@ -77,7 +83,7 @@ public class GameFieldController extends Thread {
 
                 int finalRow = row;
                 int finalCol = col;
-                btn.setOnAction(e -> revealField(finalRow, finalCol, rows, collums));
+                btn.setOnAction(e -> revealField(rows, collums, finalRow, finalCol));
 
                 buttons[row][col] = btn;
                 gamepane.add(btn, col, row);
@@ -99,6 +105,27 @@ public class GameFieldController extends Thread {
     private void revealField(int maxR, int maxC, int r, int c) {
         if (mines[r][c]) {
             buttons[r][c].setText("💣");
+            buttons[r][c].setStyle("-fx-background-color: red;");
+            gamepane.setDisable(true);
+            gameOverLabel.setVisible(true);
+            timeLabelfinish.setText(timeLabel.getText());
+            timeLabelfinish.setVisible(true);
+            timeLabel.setVisible(false);
+            r = 0;
+            c = 0;
+            while (c < maxC && r < maxR) {
+                if (mines[r][c]) {
+                    buttons[r][c].setText("💣");
+                    buttons[r][c].setStyle("-fx-background-color: red;");
+                }
+                c++;
+                if (c == maxC -1) {
+                    r++;
+                    c = 0;
+                }
+            }
+
+
         } else {
             int count = 0;
             for (int i = -1; i <= 1; i++) {
@@ -111,7 +138,7 @@ public class GameFieldController extends Thread {
                 }
             }
             buttons[r][c].setText(count > 0 ? String.valueOf(count) : "");
-            buttons[r][c].setDisable(true); // Feld deaktivieren
+            buttons[r][c].setDisable(true);
         }
     }
 
