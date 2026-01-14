@@ -33,10 +33,9 @@ Klicke auf das `Run` icon
 1. **Linksklick:** Deckt ein Feld auf. Triffst du eine Mine, ist das Spiel vorbei!
 2. **Rechtsklick:** Setzt oder entfernt eine Flagge (🚩) auf Feldern, unter denen du eine Mine vermutest.
 3. **Ziel:** Decke alle Felder auf, die keine Minen enthalten, in der kürzestmöglichen Zeit.
-4. **Reset:** Über den RESET-Button oben rechts gelangst du nachdem das spiel zuende ist zurück zum Hauptmenü, um ein
+4. **Reset:** Über den RESET-Button oben rechts gelangst du nachdem das spiel zu-ende ist zurück zum Hauptmenü, um ein
    neues Spiel zu
    starten.
-s
 
 ## Lizenz
 
