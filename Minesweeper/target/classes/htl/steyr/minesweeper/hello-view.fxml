@@ -23,7 +23,7 @@
             <Font name="Monocraft" size="11.686956405639648" />
          </font>
       </Button>
-      <Label layoutX="100.0" layoutY="47.0" text="Welcome To My Minesweeper!">
+      <Label layoutX="100.0" layoutY="47.0" text="Welcome To CreeperSweeper!">
          <font>
             <Font name="Monocraft" size="23.0" />
          </font>
