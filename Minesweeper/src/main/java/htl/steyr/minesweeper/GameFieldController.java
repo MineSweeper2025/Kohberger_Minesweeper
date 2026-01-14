@@ -4,19 +4,25 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.w3c.dom.css.Counter;
 
+import java.io.IOException;
 
-public class GameFieldController extends Thread {
+
+public class GameFieldController {
 
     public Label gameOverLabel;
-    public Label timeLabelfinish;
+    public Button resetButton;
     @FXML
     private Label timeLabel;
 
@@ -25,35 +31,35 @@ public class GameFieldController extends Thread {
 
     private boolean[][] mines;
     private Button[][] buttons;
+    private Timeline timeline;
+    private int secondsPassed = 0;
 
 
     @FXML
     private void initialize() {
+        setupTimer();
         startTimer();
     }
 
+    private void setupTimer() {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            secondsPassed++;
+            timeLabel.setText(String.format("%03d", secondsPassed));
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+    }
 
     public void startTimer() {
-        int stopcounter = 0;
-        stopcounter++;
-        Timeline timeline = new Timeline();
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        final int[] counter = {0};
+        secondsPassed = 0;
+        timeLabel.setText("000");
+        timeline.playFromStart();
+    }
 
-        if (stopcounter == 1) {
-            KeyFrame frame = new KeyFrame(Duration.seconds(1), event -> {
-                counter[0]++;
-                timeLabel.setText(String.valueOf(counter[0]));
-            });
-
-            timeline.getKeyFrames().add(frame);
-            timeline.play();
-        } else if (stopcounter == 2) {
+    public void stopTimer() {
+        if (timeline != null) {
             timeline.stop();
         }
     }
-
-
 
     int setDifficulty(int difficulty) {
         int minesdificulty = 0;
@@ -105,29 +111,23 @@ public class GameFieldController extends Thread {
     }
 
     private void revealField(int maxR, int maxC, int r, int c) {
-        if (r < 0 || r >= maxR || c < 0 || c >= maxC || buttons[r][c].isDisable()) {
+        if (r < 0 || r >= maxR || c < 0 || c >= maxC || buttons[r][c].isDisable() || "🚩".equals(buttons[r][c].getText())) {
             return;
         }
 
         if (mines[r][c]) {
-            buttons[r][c].setText("💣");
-            buttons[r][c].setStyle("-fx-background-color: red;");
+            stopTimer();
             gamepane.setDisable(true);
             gameOverLabel.setVisible(true);
-            timeLabelfinish.setText(timeLabel.getText());
-            timeLabelfinish.setVisible(true);
-            timeLabel.setVisible(false);
-            r = 0;
-            c = 0;
-            while (c < maxC && r < maxR) {
-                if (mines[r][c]) {
-                    buttons[r][c].setText("💣");
-                    buttons[r][c].setStyle("-fx-background-color: red;");
-                }
-                c++;
-                if (c == maxC - 1) {
-                    r++;
-                    c = 0;
+            resetButton.setVisible(true);
+
+
+            for (int row = 0; row < maxR; row++) {
+                for (int col = 0; col < maxC; col++) {
+                    if (mines[row][col]) {
+                        buttons[row][col].setText("💣");
+                        buttons[row][col].setStyle("-fx-background-color: red;");
+                    }
                 }
             }
         } else {
@@ -144,6 +144,7 @@ public class GameFieldController extends Thread {
 
             buttons[r][c].setText(count > 0 ? String.valueOf(count) : "");
             buttons[r][c].setDisable(true);
+            buttons[r][c].setStyle("-fx-background-color: lightgray; -fx-opacity: 1.0;");
 
             if (count == 0) {
                 for (int i = -1; i <= 1; i++) {
@@ -156,21 +157,28 @@ public class GameFieldController extends Thread {
     }
 
 
-
     public void placeFlag(MouseEvent mouseEvent, int r, int c) {
-            if(mouseEvent.getButton() == javafx.scene.input.MouseButton.SECONDARY) {
-                if(buttons[r][c].getText() == "🚩"){
-                    buttons[r][c].setText("");
-                } else {
-                    buttons[r][c].setText("🚩");
-                }
+        if (mouseEvent.getButton() == javafx.scene.input.MouseButton.SECONDARY) {
+            if (buttons[r][c].getText() == "🚩") {
+                buttons[r][c].setText("");
+            } else {
+                buttons[r][c].setText("🚩");
             }
-
-
-
-
         }
+
+
     }
 
+    public void onReset(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
 
-
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}

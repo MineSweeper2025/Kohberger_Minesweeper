@@ -3,6 +3,7 @@ module htl.steyr.minesweeper {
     requires javafx.fxml;
     requires javafx.base;
     requires jdk.xml.dom;
+    requires javafx.graphics;
 
 
     opens htl.steyr.minesweeper to javafx.fxml;
