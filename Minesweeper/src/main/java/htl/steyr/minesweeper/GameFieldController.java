@@ -41,6 +41,8 @@ public class GameFieldController {
     private Timeline timeline;
     // Verstrichene Sekunden seit Spielstart
     private int secondsPassed = 0;
+    // Anzahl der bereits sicher aufgedeckten Felder
+    private int revealedCount = 0;
 
 
     @FXML
@@ -85,15 +87,16 @@ public class GameFieldController {
      */
     public void setDifficulty(int difficulty) {
         int minesdificulty = 0;
+        int safe = 0;
         switch (difficulty) {
             case 1:
-                generateGrid(8, 8, 10);
+                generateGrid(8, 8, 10, 54);
                 break;
             case 2:
-                generateGrid(16, 16, 40);
+                generateGrid(16, 16, 40, 216);
                 break;
             case 3:
-                generateGrid(30, 16, 99);
+                generateGrid(30, 16, 99, 381);
                 break;
         }
     }
@@ -104,10 +107,11 @@ public class GameFieldController {
      * @param rows Anzahl der Zeilen
      * @param minesdificulty Anzahl der zu platzierenden Minen
      */
-    public void generateGrid(int collums, int rows, int minesdificulty) {
+    public void generateGrid(int collums, int rows, int minesdificulty, int safe) {
         gamepane.getChildren().clear();
         buttons = new Button[rows][collums];
         mines = new boolean[rows][collums];
+        revealedCount = 0;
 
         // Erstellung der Buttons und Zuweisung der Events
         for (int row = 0; row < rows; row++) {
@@ -118,7 +122,7 @@ public class GameFieldController {
                 int finalRow = row;
                 int finalCol = col;
                 // Linksklick zum Aufdecken
-                btn.setOnAction(e -> revealField(rows, collums, finalRow, finalCol));
+                btn.setOnAction(e -> revealField(rows, collums, finalRow, finalCol, safe));
                 // Rechtsklick für Flaggen
                 btn.setOnMouseClicked(e -> placeFlag(e, finalRow, finalCol));
 
@@ -134,6 +138,7 @@ public class GameFieldController {
             int c = (int) (Math.random() * collums);
             if (!mines[r][c]) {
                 mines[r][c] = true;
+                buttons[r][c].setText("B");
                 placed++;
             }
         }
@@ -146,12 +151,14 @@ public class GameFieldController {
      * @param maxC Maximale Spaltenanzahl
      * @param r Aktuelle Zeile
      * @param c Aktuelle Spalte
+     * @param safe Anzahl der sicheren Felder (ohne Minen)
      */
-    private void revealField(int maxR, int maxC, int r, int c) {
+    private void revealField(int maxR, int maxC, int r, int c, int safe) {
         // Abbruchbedingungen: außerhalb des Grids, bereits aufgedeckt oder mit Flagge markiert
         if (r < 0 || r >= maxR || c < 0 || c >= maxC || buttons[r][c].isDisable() || "🚩".equals(buttons[r][c].getText())) {
             return;
         }
+
 
         if (mines[r][c]) {
             // Fall: Mine getroffen
@@ -183,15 +190,26 @@ public class GameFieldController {
             }
 
             // Feld visuell deaktivieren und Zahl anzeigen
+            revealedCount++;
             buttons[r][c].setText(count > 0 ? String.valueOf(count) : "");
             buttons[r][c].setDisable(true);
             buttons[r][c].setStyle("-fx-background-color: lightgray; -fx-opacity: 1.0;");
+
+            //Wenn alle sicheren Felder aufgedeckt sind, gewinnt der Spieler
+            if (safe == revealedCount) {
+                stopTimer();
+                gamepane.setDisable(true);
+                gameOverLabel.setVisible(true);
+                gameOverLabel.setText("You Win!");
+                gameOverLabel.setStyle("-fx-text-fill: lime;");
+                resetButton.setVisible(true);
+            }
 
             // Wenn keine Mine in der Nachbarschaft ist, rekursiv weiter aufdecken
             if (count == 0) {
                 for (int i = -1; i <= 1; i++) {
                     for (int j = -1; j <= 1; j++) {
-                        revealField(maxR, maxC, r + i, c + j);
+                        revealField(maxR, maxC, r + i, c + j, safe);
                     }
                 }
             }
