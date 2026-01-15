@@ -35,7 +35,7 @@ public class GameFieldController {
 
     //Array zur Speicherung der Minen-Positionen
     private boolean[][] mines;
-    // Zweidimensionales Array der Button-Instanzen im UI
+    // Array der Buttons im UI
     private Button[][] buttons;
     // Timeline für die Verwaltung des Sekundenzählers
     private Timeline timeline;
@@ -81,9 +81,9 @@ public class GameFieldController {
     /**
      * Konfiguriert die Grid-Größe und Minenanzahl basierend auf dem Schwierigkeitsgrad.
      * @param difficulty Der gewählte Schwierigkeitsgrad (1-3)
-     * @return wert für die Anzahl der zu generierenden Minen
+     * @return minesdificulty, wert für die Anzahl der zu generierenden Minen
      */
-    int setDifficulty(int difficulty) {
+    public void setDifficulty(int difficulty) {
         int minesdificulty = 0;
         switch (difficulty) {
             case 1:
@@ -96,7 +96,6 @@ public class GameFieldController {
                 generateGrid(30, 16, 99);
                 break;
         }
-        return minesdificulty;
     }
 
     /**
