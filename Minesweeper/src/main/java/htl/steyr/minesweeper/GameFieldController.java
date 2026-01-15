@@ -138,7 +138,7 @@ public class GameFieldController {
             int c = (int) (Math.random() * collums);
             if (!mines[r][c]) {
                 mines[r][c] = true;
-                buttons[r][c].setText("B");
+               // buttons[r][c].setText("💣"); // Admin mode
                 placed++;
             }
         }
