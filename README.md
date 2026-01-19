@@ -1,6 +1,6 @@
-# Creeper Sweeper
+# Creeper Sweeper™
 
-Willkommen bei **Creeper Sweeper**
+Willkommen bei **Creeper Sweeper™**
 
 **Features**
 
@@ -22,7 +22,7 @@ Willkommen bei **Creeper Sweeper**
 - **IDE wie zb. IntelliJ IDEA**
 - **Java SDK 25**
 
-### So startest du Creeper Sweeper
+### So startest du Creeper Sweeper™
 
 **Das Spiel ausführen:**
 Starte die Anwendung über die Klasse `Launcher`.
@@ -34,10 +34,14 @@ Klicke auf das `Run` icon
 2. **Rechtsklick:** Setzt oder entfernt eine Flagge (🚩) auf Feldern, unter denen du eine Mine vermutest.
 3. **Ziel:** Decke alle Felder auf, die keine Minen enthalten, in der kürzestmöglichen Zeit.
 4. **Reset:** Über den RESET-Button oben rechts gelangst du nachdem das spiel zu-ende ist zurück zum Hauptmenü, um ein
-   neues Spiel zu
-   starten.
+   neues Spiel zu starten.
 
-## Lizenz
+## Admin Funktionen
+1. STRG+A aktiviert denn Admin modus und deckt alle Bombenfelder auf.
+2. STRG+W leitet einen automatischen WIN ein.
 
-**Rechtlicher Hinweis:** CreeperSweeper ist ein eigenständiges und urheberrechtlich geschütztes Produkt. Jegliche
+### Lizenz
+
+**Rechtlicher Hinweis:** CreeperSweeper™ ist ein eigenständiges und urheberrechtlich geschütztes Produkt. Jegliche
 Ähnlichkeit mit anderen Spielen ist rein zufällig und nicht beabsichtigt. Alle Rechte vorbehalten.
+

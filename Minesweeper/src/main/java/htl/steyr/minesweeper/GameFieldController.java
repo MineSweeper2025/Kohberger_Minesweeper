@@ -11,13 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.w3c.dom.css.Counter;
 
 import java.io.IOException;
 
@@ -31,6 +29,7 @@ public class GameFieldController {
     public Label gameOverLabel;
     public Button resetButton;
     public AnchorPane AnchorPane;
+
     @FXML
     private Label timeLabel;
 
@@ -50,12 +49,15 @@ public class GameFieldController {
     //Checks if Admin Mode is on
     private boolean adminModeOn = false;
 
+    public boolean enterPressed = false;
+
 
     @FXML
     private void initialize() {
         setupTimer();
         startTimer();
-        AnchorPane.setOnKeyPressed(this::onAdminMode);
+        AnchorPane.setOnKeyPressed(this::AdminCommands);
+
     }
 
 
@@ -262,13 +264,14 @@ public class GameFieldController {
         }
     }
 
-
-
     /**
-     * Setzt die Bomben sichtbar, indem man STRG+a drückt
+     * Setzt die Bomben sichtbar, indem man STRG+a drückt.
+     * Leitet einen WIN ein, wenn man STRG+W drückt.
      * @param keyEvent Checks for Admin Key
+     *
+     *
      */
-    public void onAdminMode(KeyEvent keyEvent) {
+    public void AdminCommands(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
         if (code == KeyCode.A && keyEvent.isControlDown()) {
             adminModeOn = !adminModeOn;  // Toggle the boolean
@@ -277,6 +280,23 @@ public class GameFieldController {
                     if (mines[row][col]) {
                         buttons[row][col].setText(adminModeOn ? "💣" : "");
                         buttons[row][col].setDisable(adminModeOn);
+                    }
+                }
+            }
+        } else if ( code == KeyCode.W && keyEvent.isControlDown()) {
+
+            stopTimer();
+            gamepane.setDisable(true);
+            gameOverLabel.setVisible(true);
+            gameOverLabel.setText("You Win!");
+            gameOverLabel.setStyle("-fx-text-fill: lime;");
+            resetButton.setVisible(true);
+            for (int row = 0; row < mines.length; row++) {
+                for (int col = 0; col < mines[0].length; col++) {
+                    if (!mines[row][col]) {
+                        buttons[row][col].setDisable(true);
+                        buttons[row][col].setStyle("-fx-background-color: lightgray; -fx-opacity: 1.0;");
+
                     }
                 }
             }

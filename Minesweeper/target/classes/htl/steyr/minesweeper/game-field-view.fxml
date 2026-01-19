@@ -6,7 +6,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="AnchorPane" prefHeight="56.0" prefWidth="53.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.minesweeper.GameFieldController">
+<?import javafx.scene.layout.HBox?>
+<AnchorPane fx:id="AnchorPane" prefHeight="56.0" prefWidth="53.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.minesweeper.GameFieldController" stylesheets="@style2.css">
     <children>
         <GridPane fx:id="gamepane" layoutY="41.0">
 
