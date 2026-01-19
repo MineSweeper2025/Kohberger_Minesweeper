@@ -265,6 +265,7 @@ public class GameFieldController {
 
 
     /**
+     * Setzt die Bomben sichtbar, indem man STRG+a drückt
      * @param keyEvent Checks for Admin Key
      */
     public void onAdminMode(KeyEvent keyEvent) {
