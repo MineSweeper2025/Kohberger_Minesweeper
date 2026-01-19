@@ -16,8 +16,8 @@
     -fx-text-fill: lime;
     -fx-border-color: silver;
     -fx-border-width: 2;
-    -fx-border-radius: 0;
-    -fx-background-radius: 0;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
 }
 
 
