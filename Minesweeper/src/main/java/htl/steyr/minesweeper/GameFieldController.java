@@ -49,9 +49,6 @@ public class GameFieldController {
     //Checks if Admin Mode is on
     private boolean adminModeOn = false;
 
-    public boolean enterPressed = false;
-
-
     @FXML
     private void initialize() {
         setupTimer();
@@ -201,7 +198,7 @@ public class GameFieldController {
                 }
             }
 
-            // Feld visuell deaktivieren und Zahl anzeigen
+            // Feld deaktivieren und Zahl anzeigen
             revealedCount++;
             buttons[r][c].setText(count > 0 ? String.valueOf(count) : "");
             buttons[r][c].setDisable(true);
@@ -268,8 +265,6 @@ public class GameFieldController {
      * Setzt die Bomben sichtbar, indem man STRG+a drückt.
      * Leitet einen WIN ein, wenn man STRG+W drückt.
      * @param keyEvent Checks for Admin Key
-     *
-     *
      */
     public void AdminCommands(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
@@ -283,7 +278,7 @@ public class GameFieldController {
                     }
                 }
             }
-        } else if ( code == KeyCode.W && keyEvent.isControlDown()) {
+        } else if (code == KeyCode.W && keyEvent.isControlDown()) {
 
             stopTimer();
             gamepane.setDisable(true);
@@ -297,7 +292,7 @@ public class GameFieldController {
                         buttons[row][col].setDisable(true);
                         buttons[row][col].setStyle("-fx-background-color: lightgray; -fx-opacity: 1.0;");
 
-                        }else {
+                    } else {
                         buttons[row][col].setText("💣");
                         buttons[row][col].setStyle("-fx-background-color: red;");
                     }
