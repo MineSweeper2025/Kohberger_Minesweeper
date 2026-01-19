@@ -12,7 +12,9 @@ Willkommen bei **Creeper Sweeper™**
 - **Timer:** Ein digitaler Timer
 
 #### Notiz:
-- Der erste Klick ist pures Glück, es ist keine Garantie, dass sich unter dem ersten Feld keine Bombe befindet. Dieses Feature
+
+- Der erste Klick ist pures Glück, es ist keine Garantie, dass sich unter dem ersten Feld keine Bombe befindet. Dieses
+  Feature
   wurde implementiert, um einen Speedrun dieses Spiels zu entmutigen.
 
 ## Starten des Spiels
@@ -30,6 +32,20 @@ Klicke auf das `Run` icon
 
 ## Spielanleitung
 
+1. **Spielstart**
+   - Wähle im Hauptmenü einen Schwierigkeitsgrad aus.
+
+2. **Spielprinzip**:
+    - Finde alle Minen im Spielfeld, ohne sie aufzudecken
+    - Zahlen zeigen an, wie viele Minen sich in den acht angrenzenden Feldern befinden
+    - Ein leeres Feld bedeutet, dass keine Minen in der Nähe sind
+
+3. **Spielende**:
+    - Gewonnen: Alle minenfreien Felder wurden aufgedeckt
+    - Verloren: Eine Mine wurde aufgedeckt
+
+## Spielfunktionen
+
 1. **Linksklick:** Deckt ein Feld auf. Triffst du eine Mine, ist das Spiel vorbei!
 2. **Rechtsklick:** Setzt oder entfernt eine Flagge (🚩) auf Feldern, unter denen du eine Mine vermutest.
 3. **Ziel:** Decke alle Felder auf, die keine Minen enthalten, in der kürzestmöglichen Zeit.
@@ -37,6 +53,7 @@ Klicke auf das `Run` icon
    neues Spiel zu starten.
 
 ## Admin Funktionen
+
 1. STRG+A aktiviert denn Admin modus und deckt alle Bombenfelder auf.
 2. STRG+W leitet einen automatischen WIN ein.
 
