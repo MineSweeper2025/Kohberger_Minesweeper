@@ -6,22 +6,21 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.layout.HBox?>
-<AnchorPane fx:id="AnchorPane" prefHeight="56.0" prefWidth="53.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.minesweeper.GameFieldController" stylesheets="@style2.css">
+<AnchorPane fx:id="AnchorPane" prefHeight="56.0" prefWidth="53.0" stylesheets="@style2.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.minesweeper.GameFieldController">
     <children>
         <GridPane fx:id="gamepane" layoutY="41.0" styleClass="gamePane">
 
         </GridPane>
-      <Label fx:id="timeLabel" alignment="CENTER" contentDisplay="TOP" layoutY="1.0" prefHeight="30.0" prefWidth="80.0" text="0" textAlignment="CENTER" textFill="LIME" styleClass="timeLabel">
+      <Label fx:id="timeLabel" alignment="CENTER" contentDisplay="TOP" layoutY="1.0" prefHeight="30.0" prefWidth="80.0" styleClass="timeLabel" text="0" textAlignment="CENTER" textFill="LIME">
          <font>
             <Font name="Courier New Bold Italic" size="30.0" />
          </font></Label>
-      <Label fx:id="gameOverLabel" alignment="TOP_CENTER" layoutX="117.0" prefHeight="53.0" prefWidth="297.0" text="Game Over!"  visible="false" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="117.0" AnchorPane.topAnchor="0.0">
+      <Label fx:id="gameOverLabel" alignment="TOP_CENTER" layoutX="117.0" maxWidth="1.7976931348623157E308" prefHeight="53.0" prefWidth="113.0" text="Game Over!" visible="false" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font name="Elephant Italic" size="38.0" />
          </font>
       </Label>
-      <Button fx:id="resetButton" layoutX="364.0" layoutY="3.0" mnemonicParsing="false" onAction="#onReset" text="Reset" visible="false" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="3.0" styleClass="reset">
+      <Button fx:id="resetButton" layoutX="364.0" layoutY="3.0" mnemonicParsing="false" onAction="#onReset" styleClass="reset" text="Reset" visible="false" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="3.0">
          <font>
             <Font name="Courier New Bold Italic" size="16.0" />
          </font>

@@ -140,6 +140,12 @@ public class GameFieldController {
             }
         }
 
+        if (safe == 54){
+            gameOverLabel.setStyle("-fx-font-size: 12");
+            resetButton.setStyle("-fx-font-size:15");
+            timeLabel.setStyle("-fx-font-size: 22");
+        }
+
         // Zufälliges Platzieren der Minen
         int placed = 0;
         while (placed < minesdificulty) {
