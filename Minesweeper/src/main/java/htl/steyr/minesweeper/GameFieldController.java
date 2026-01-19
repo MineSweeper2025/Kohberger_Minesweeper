@@ -276,6 +276,7 @@ public class GameFieldController {
                 for (int col = 0; col < mines[0].length; col++) {
                     if (mines[row][col]) {
                         buttons[row][col].setText(adminModeOn ? "💣" : "");
+                        buttons[row][col].setDisable(adminModeOn);
                     }
                 }
             }
