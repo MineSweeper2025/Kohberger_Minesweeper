@@ -269,8 +269,8 @@ public class GameFieldController {
      */
     public void onAdminMode(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
-        if (code == KeyCode.COMMA) {
-            adminModeOn = !adminModeOn;  // Toggle the state
+        if (code == KeyCode.A && keyEvent.isControlDown()) {
+            adminModeOn = !adminModeOn;  // Toggle the boolean
             for (int row = 0; row < mines.length; row++) {
                 for (int col = 0; col < mines[0].length; col++) {
                     if (mines[row][col]) {
