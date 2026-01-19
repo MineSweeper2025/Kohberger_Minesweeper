@@ -297,6 +297,9 @@ public class GameFieldController {
                         buttons[row][col].setDisable(true);
                         buttons[row][col].setStyle("-fx-background-color: lightgray; -fx-opacity: 1.0;");
 
+                        }else {
+                        buttons[row][col].setText("💣");
+                        buttons[row][col].setStyle("-fx-background-color: red;");
                     }
                 }
             }
