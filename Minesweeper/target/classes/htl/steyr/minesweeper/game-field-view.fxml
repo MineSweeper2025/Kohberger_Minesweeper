@@ -12,16 +12,16 @@
         <GridPane fx:id="gamepane" layoutY="41.0">
 
         </GridPane>
-      <Label fx:id="timeLabel" alignment="CENTER" contentDisplay="TOP" layoutY="1.0" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #333333; -fx-background-radius: 5; -fx-border-color: silver; -fx-border-width: 2; -fx-border-radius: 5;" text="0" textAlignment="CENTER" textFill="LIME">
+      <Label fx:id="timeLabel" alignment="CENTER" contentDisplay="TOP" layoutY="1.0" prefHeight="30.0" prefWidth="80.0" text="0" textAlignment="CENTER" textFill="LIME" styleClass="timeLabel">
          <font>
             <Font name="Courier New Bold Italic" size="30.0" />
          </font></Label>
-      <Label fx:id="gameOverLabel" alignment="TOP_CENTER" layoutX="117.0" prefHeight="53.0" prefWidth="297.0" text="Game Over!" textFill="#fe0000" visible="false" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="117.0" AnchorPane.topAnchor="0.0">
+      <Label fx:id="gameOverLabel" alignment="TOP_CENTER" layoutX="117.0" prefHeight="53.0" prefWidth="297.0" text="Game Over!"  visible="false" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="117.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font name="Elephant Italic" size="38.0" />
          </font>
       </Label>
-      <Button fx:id="resetButton" layoutX="364.0" layoutY="3.0" mnemonicParsing="false" onAction="#onReset" style="-fx-background-color: #333333; -fx-text-fill: #00FF00; -fx-border-color: #C0C0C0; -fx-border-width: 2; -fx-border-radius: 0; -fx-background-radius: 0;" text="Reset" textFill="LIME" visible="false" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="3.0">
+      <Button fx:id="resetButton" layoutX="364.0" layoutY="3.0" mnemonicParsing="false" onAction="#onReset" text="Reset" visible="false" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="3.0" styleClass="reset">
          <font>
             <Font name="Courier New Bold Italic" size="16.0" />
          </font>
