@@ -9,8 +9,11 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -27,6 +30,7 @@ public class GameFieldController {
 
     public Label gameOverLabel;
     public Button resetButton;
+    public AnchorPane AnchorPane;
     @FXML
     private Label timeLabel;
 
@@ -43,13 +47,17 @@ public class GameFieldController {
     private int secondsPassed = 0;
     // Anzahl der bereits sicher aufgedeckten Felder
     private int revealedCount = 0;
+    //Checks if Admin Mode is on
+    private boolean adminModeOn = false;
 
 
     @FXML
     private void initialize() {
         setupTimer();
         startTimer();
+        AnchorPane.setOnKeyPressed(this::onAdminMode);
     }
+
 
     /**
      * Konfiguriert die Timeline, die jede Sekunde das Zeit-Label aktualisiert.
@@ -82,6 +90,7 @@ public class GameFieldController {
 
     /**
      * Konfiguriert die Grid-Größe und Minenanzahl basierend auf dem Schwierigkeitsgrad.
+     *
      * @param difficulty Der gewählte Schwierigkeitsgrad (1-3)
      * @return minesdificulty, wert für die Anzahl der zu generierenden Minen
      */
@@ -103,8 +112,9 @@ public class GameFieldController {
 
     /**
      * Erstellt das visuelle Spielfeld und verteilt die Minen zufällig.
-     * @param collums Anzahl der Spalten
-     * @param rows Anzahl der Zeilen
+     *
+     * @param collums        Anzahl der Spalten
+     * @param rows           Anzahl der Zeilen
      * @param minesdificulty Anzahl der zu platzierenden Minen
      */
     public void generateGrid(int collums, int rows, int minesdificulty, int safe) {
@@ -130,7 +140,7 @@ public class GameFieldController {
                 gamepane.add(btn, col, row);
             }
         }
-        
+
         // Zufälliges Platzieren der Minen
         int placed = 0;
         while (placed < minesdificulty) {
@@ -138,7 +148,6 @@ public class GameFieldController {
             int c = (int) (Math.random() * collums);
             if (!mines[r][c]) {
                 mines[r][c] = true;
-               // buttons[r][c].setText("💣"); // Admin mode
                 placed++;
             }
         }
@@ -147,10 +156,11 @@ public class GameFieldController {
     /**
      * Logik zum Aufdecken eines Feldes. Beinhaltet die Überprüfung auf Minen
      * und die rekursive Aufdeckung leerer Nachbarfelder.
+     *
      * @param maxR Maximale Zeilenanzahl
      * @param maxC Maximale Spaltenanzahl
-     * @param r Aktuelle Zeile
-     * @param c Aktuelle Spalte
+     * @param r    Aktuelle Zeile
+     * @param c    Aktuelle Spalte
      * @param safe Anzahl der sicheren Felder (ohne Minen)
      */
     private void revealField(int maxR, int maxC, int r, int c, int safe) {
@@ -195,6 +205,7 @@ public class GameFieldController {
             buttons[r][c].setDisable(true);
             buttons[r][c].setStyle("-fx-background-color: lightgray; -fx-opacity: 1.0;");
 
+
             //Wenn alle sicheren Felder aufgedeckt sind, gewinnt der Spieler
             if (safe == revealedCount) {
                 stopTimer();
@@ -218,9 +229,10 @@ public class GameFieldController {
 
     /**
      * Setzt oder entfernt eine Flagge per Rechtsklick.
+     *
      * @param mouseEvent Das MouseEvent zur Bestimmung der Maustaste
-     * @param r Zeile des Buttons
-     * @param c Spalte des Buttons
+     * @param r          Zeile des Buttons
+     * @param c          Spalte des Buttons
      */
     public void placeFlag(MouseEvent mouseEvent, int r, int c) {
         if (mouseEvent.getButton() == javafx.scene.input.MouseButton.SECONDARY) {
@@ -234,6 +246,7 @@ public class GameFieldController {
 
     /**
      * Beendet das aktuelle Spiel und kehrt zum Hauptmenü zurück.
+     *
      * @param event Das ActionEvent vom Reset-Button
      */
     public void onReset(ActionEvent event) {
@@ -246,6 +259,25 @@ public class GameFieldController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+
+
+    /**
+     * @param keyEvent Checks for Admin Key
+     */
+    public void onAdminMode(KeyEvent keyEvent) {
+        KeyCode code = keyEvent.getCode();
+        if (code == KeyCode.COMMA) {
+            adminModeOn = !adminModeOn;  // Toggle the state
+            for (int row = 0; row < mines.length; row++) {
+                for (int col = 0; col < mines[0].length; col++) {
+                    if (mines[row][col]) {
+                        buttons[row][col].setText(adminModeOn ? "💣" : "");
+                    }
+                }
+            }
         }
     }
 }
