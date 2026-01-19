@@ -5,31 +5,31 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="277.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.minesweeper.HelloController" stylesheets="@style.css">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="277.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="htl.steyr.minesweeper.HelloController">
    <children>
-      <Button layoutX="92.0" layoutY="146.0" mnemonicParsing="false" onAction="#onAnfaenger" prefHeight="53.0" prefWidth="92.0" text="Anfaenger">
+      <Button layoutX="92.0" layoutY="146.0" mnemonicParsing="false" onAction="#onAnfaenger" prefHeight="53.0" prefWidth="92.0" text="Anfänger">
          <font>
-            <Font name="Monocraft" size="11.686956405639648" />
+            <Font name="Lucida Bright Demibold" size="11.686956405639648" />
          </font>
       </Button>
       <Button layoutX="210.0" layoutY="146.0" mnemonicParsing="false" onAction="#onFortgeschritten" prefHeight="53.0" prefWidth="179.0" text="Fortgeschritten">
          <font>
-            <Font name="Monocraft" size="11.686956405639648" />
+            <Font name="Lucida Bright Demibold" size="11.686956405639648" />
          </font>
       </Button>
       <Button layoutX="415.0" layoutY="146.0" mnemonicParsing="false" onAction="#onProfi" prefHeight="53.0" prefWidth="70.0" text="Profi">
          <font>
-            <Font name="Monocraft" size="11.686956405639648" />
+            <Font name="Lucida Bright Demibold" size="11.686956405639648" />
          </font>
       </Button>
-      <Label layoutX="100.0" layoutY="47.0" text="Welcome To CreeperSweeper™">
+      <Label layoutX="119.0" layoutY="53.0" text="Welcome To CreeperSweeper™">
          <font>
-            <Font name="Monocraft" size="23.0" />
+            <Font name="Lucida Bright Demibold" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="185.0" layoutY="81.0" text="Choose Your Difficulty.">
+      <Label layoutX="210.0" layoutY="89.0" text="Choose Your Difficulty.">
          <font>
-            <Font name="Monocraft" size="15.0" />
+            <Font name="Lucida Bright Demibold" size="15.0" />
          </font>
       </Label>
       <Label layoutX="280.0" layoutY="228.0" text="© 1999" />

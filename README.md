@@ -4,7 +4,7 @@ Willkommen bei **Creeper Sweeper™**
 
 **Features**
 
-- **Dynamischer Schwierigkeitsgrad:** Wähle zwischen drei Stufen:
+- ** Schwierigkeitsgrad:** Wähle zwischen drei Stufen:
     * **Anfänger:** 8x8 Gitter mit 10 Minen.
     * **Fortgeschritten:** 16x16 Gitter mit 40 Minen.
     * **Profi:** 30x16 Gitter mit satten 99 Minen
@@ -16,6 +16,8 @@ Willkommen bei **Creeper Sweeper™**
 - Der erste Klick ist pures Glück, es ist keine Garantie, dass sich unter dem ersten Feld keine Bombe befindet. Dieses
   Feature
   wurde implementiert, um einen Speedrun dieses Spiels zu entmutigen.
+- Dieses Spiel wurde mit einem speziellen Font designed. Um das bestmögliche Spielerlebnis zu gewährleisten, stelle sicher, dass der Font korrekt
+  geladen wird. Die Datei befindet sich im root Verzeichnis.
 
 ## Starten des Spiels
 

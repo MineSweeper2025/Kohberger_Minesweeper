@@ -6,14 +6,14 @@
     -fx-background-color: #333333;
     -fx-background-radius: 5;
     -fx-border-color: silver;
-    -fx-text-fill: red;
+    -fx-text-fill: lime;
     -fx-border-width: 2;
     -fx-border-radius: 5;
 }
 
 .reset {
     -fx-background-color: #333333;
-    -fx-text-fill: #00FF00;
+    -fx-text-fill: lime;
     -fx-border-color: silver;
     -fx-border-width: 2;
     -fx-border-radius: 0;
