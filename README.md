@@ -4,7 +4,7 @@ Willkommen bei **Creeper Sweeper™**
 
 **Features**
 
-- ** Schwierigkeitsgrad:** Wähle zwischen drei Stufen:
+** Schwierigkeitsgrad:** Wähle zwischen drei Stufen:
     * **Anfänger:** 8x8 Gitter mit 10 Minen.
     * **Fortgeschritten:** 16x16 Gitter mit 40 Minen.
     * **Profi:** 30x16 Gitter mit 99 Minen
