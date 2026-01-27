@@ -60,5 +60,5 @@ Klicke auf das `Run` icon
 ### Lizenz
 
 **Rechtlicher Hinweis:** CreeperSweeper™ ist ein eigenständiges und urheberrechtlich geschütztes Produkt. Jegliche
-Ähnlichkeit mit anderen Spielen ist rein zufällig und nicht beabsichtigt. Alle Rechte vorbehalten.
+Ähnlichkeit mit anderen Spielen ist rein zufällig und nicht beabsichtigt. Alle Rechte vorbehalten. (Lizenz ist Satire) 
 
